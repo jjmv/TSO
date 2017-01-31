@@ -52,16 +52,17 @@ taken = []
 for i in range(len(valores_estudiantes)):
     for j in range(len(valores_estudiantes)):
         if not(j in taken) and(datos[i][j] != 0):
-            menor = datos[i][j]
+            menor1 = datos[i][j]
             qwer = j
             break
     for j in range(len(valores_estudiantes)):
-        if((datos[i][j] < menor ) and not(j in taken) and(datos[i][j] != 0)):
-            menor = datos[i][j]
+        if((datos[i][j] < menor1 ) and not(j in taken) and(datos[i][j] != 0)):
+            menor1 = datos[i][j]
             qwer = j
 
-    total += menor
-    combinacion_optima.append(menor)
+    total += menor1
+    combinacion_optima.append(menor1)
     taken.append(qwer)
     print("Al estudiante " + str(i + 1) + " se le asgina la tarea " + str(qwer + 1))
+
 print("El tiempo optimo es " + str(total))
