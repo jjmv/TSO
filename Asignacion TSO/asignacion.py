@@ -3,9 +3,10 @@ import csv
 
 total = 0
 valores_estudiantes =[]
-
+print("Ingrete el nombre del archivo [Tarea],[Clase],[TareaSinCeros]")
+nombre = input() + ".csv"
 try:
-    archivo_valores = open("Tarea.csv","r") #Se abre el archivo que contiene los datos
+    archivo_valores = open(nombre,"r") #Se abre el archivo que contiene los datos
     reader = csv.reader(archivo_valores)
     for i in reader:
         valores_estudiantes.append(i)
@@ -63,6 +64,6 @@ for i in range(len(valores_estudiantes)):
     total += menor1
     combinacion_optima.append(menor1)
     taken.append(qwer)
-    print("Al estudiante " + str(i + 1) + " se le asgina la tarea " + str(qwer + 1))
+    print("Al individuo " + str(i + 1) + " se le asgina la tarea " + str(qwer + 1))
 
 print("El tiempo optimo es " + str(total))
