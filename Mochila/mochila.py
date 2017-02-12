@@ -2,7 +2,7 @@ import sys
 import csv
 import time
 
-start_time = time.clock()
+
 print("\nIngrese el nombre del archivo [Clase],[Caso1],[Caso2]....[Caso'n']")
 nombre = input() + ".csv"
 valores_objetos = []
@@ -16,7 +16,8 @@ try:
 except IOError:
     print("Error al abrir el archivo")
     sys.exit(1)
-
+    
+start_time = time.clock()
 valores_objetos[0].pop(0)
 capacidad = int(valores_objetos[0][0])
 
