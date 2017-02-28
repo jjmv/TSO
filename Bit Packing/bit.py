@@ -44,22 +44,26 @@ for i in range(len(objetos)):
     valor = objetos[taken[i]]
     lista_reaordenada.append(valor)
 
-discos = []
+contador_discos = 0
 taken = []
 while(len(taken) < len(lista_reaordenada)):
     auxiliar = []
+    i=0
     peso_usado = 0
     peso_disponible = capacidad
     for w in range(len(lista_reaordenada)):
         if(lista_reaordenada[w][1] <= peso_disponible)and not(w in taken):
             valor = lista_reaordenada[w]
             auxiliar.append(valor)
-            peso_usado += auxiliar[w][1]
+            peso_usado += auxiliar[i][1]
             peso_disponible -= lista_reaordenada[w][1]
             taken.append(w)
-        else:
-            
-            break
-    discos.append(auxiliar)
+            i += 1
+    contador_discos += 1
+    print("En el disco " + str(contador_discos) + " se incluyen las canciones ")
+    for i in range(len(auxiliar)):
+        print(str(auxiliar[i][0]))
+    print("Con un peso utilizado del disco de: " + str(peso_usado) + "\n    ")
 
-print(discos)
+tiempo = time.clock() - start_time
+print("Tiempo computacional " + str(tiempo))
