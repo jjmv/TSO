@@ -63,7 +63,7 @@ while(len(taken) < len(lista_reaordenada)):
     print("En el disco " + str(contador_discos) + " se incluyen las canciones ")
     for i in range(len(auxiliar)):
         print(str(auxiliar[i][0]))
-    print("Con un peso utilizado del disco de: " + str(peso_usado) + "\n    ")
+    print("Con un peso utilizado del disco de: " + str(peso_usado) + "\n")
 
 tiempo = time.clock() - start_time
 print("Tiempo computacional " + str(tiempo))

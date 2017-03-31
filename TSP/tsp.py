@@ -59,14 +59,13 @@ for i in range(len(promedios)):
         promedio_feo = promedios[i]
         ciudad_inicial = i
 """
-ciudad_inicial = 0
+
 
 solucion_inicial = []
 solucion_inicial.append(ciudad_inicial)
 taken = []
 taken.append(ciudad_inicial)
-indice = ciudad_inicial
-
+indice = 0
 vecino = 0
 #Calculo de la solucion inicial (aun sin hacer el movement)
 for i in range(len(distancias)):
@@ -120,7 +119,7 @@ nuevas_aristas = []
 suma_vieja = suma_distancia_inicial
 breaker = False
 #Inicio del movement
-while(contador < 1000):
+while(contador < 5):
     for i in range(len(distancias)-2):
         for j in range(len(distancias)-2):
             nueva_suma = 0
