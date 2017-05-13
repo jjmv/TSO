@@ -11,7 +11,6 @@ contador = 0
 soluciones_sumas = [0 for i in range(200)]
 soluciones_multiarranque = [[] for i in range(200)]
 solucion_multiarranque_menor = 0
-movimiento = solucion_inicial
 
 print("\nIngrese el nombre del archivo [Clase],[Caso1],[Caso2]....[Caso'n']")
 nombre = input() + ".txt"
@@ -36,6 +35,7 @@ distancias = [[float(0) for i in range(len(valores_objetos))]for j in range(len(
 
 #Declarar función para sacar distancia euclidiana
 def euclidiana(i,j):
+
     if(i != j):
         cua= float(0)
         suma = float(0)
@@ -72,46 +72,39 @@ def vecino_cercano():
     print(suma_distancia_inicial)
 
 
-
 def movement():
-    global solucion_inicial, suma_evaluadora, suma_distancia_inicial,movimiento
-    terminar = False
+    global movimiento, suma_distancia_inicial, suma_evaluadora
     iterar = True
+    terminar = False
     contador = 0
+    movimiento = arreglo
     while(iterar == True):
-        for i in range(len(distancias)-2):
-            for j in range(len(distancias)-2):
-                #indicador1 = movimiento[i+1]
-                #indicador2 = movimiento[i+2]
-                indicadores = []
-                indicadores.append(movimiento[i+1])
-                indicadores.append(movimiento[i+2])
-                #print(indicadores)
-                movimiento.pop(i+1)
-                movimiento.pop(i+1)
-                #movimiento.insert(j+1, indicador2)
-                #movimiento.insert(j+1, indicador1)
-                movimiento[j+1:j+1] = indicadores
+        for i in range(len(distancias)-3):
+            for j in range(len(distancias)-3):
+                #movimiento = solucion_inicial
+                indicador1 = movimiento[j+1]
+                indicador2 = movimiento[j+2]
+                indicadores = [indicador1, indicador2]
+                movimiento.pop(j+1), movimiento.pop(j+1)
+                movimiento[j+2:j+2] = indicadores
                 suma_evaluadora = 0
-                #print(movimiento)
                 for k in range(len(movimiento)-1):
                     suma_evaluadora += distancias[movimiento[k]][movimiento[k+1]]
-                #print(suma_evaluadora)
                 if(suma_evaluadora < suma_distancia_inicial):
                     suma_distancia_inicial = suma_evaluadora
-                    #solucion_inicial = movimiento
+                    for m in range(len(solucion_inicial)-2):
+                        solucion_inicial[m] = movimiento[m]
                     contador = 0
                 else:
+                    for k in range(len(solucion_inicial)):
+                        movimiento[k] = solucion_inicial[k]
                     contador += 1
-                    #movimiento = solucion_inicial
-                    print(solucion_inicial)
-                    if(contador == 10):
+                    if(contador == 100):
                         terminar = True
                         break
             if(terminar == True):
+                iterar = False
                 break
-        iterar = False
-
 
 def multiarranque():
     global solucion_inicial, solucion_multiarranque_menor
@@ -130,7 +123,7 @@ def multiarranque():
                     menor = distancias[soluciones_multiarranque[q][len(soluciones_multiarranque[q])-1]][i]
                 if not(i in soluciones_multiarranque[q]) and(distancias[soluciones_multiarranque[q][len(soluciones_multiarranque[q])-1]][i] > mayor):
                     mayor = distancias[soluciones_multiarranque[q][len(soluciones_multiarranque[q])-1]][i]
-            maximo = menor + .3 *(mayor - menor)
+            maximo = menor + .02 *(mayor - menor)
             for j in range(len(distancias)):
                 if not(j in soluciones_multiarranque[q]) and(distancias[soluciones_multiarranque[q][len(soluciones_multiarranque[q])-1]][j] <= maximo):
                     posibles_vecinos.append(j)
@@ -145,16 +138,22 @@ def multiarranque():
 
 #############################   Aqui comienza el "MAIN"   #############################
 #Ejecucion de la función para calcular distancias
+start_time = time.clock()
 for i in range(len(valores_objetos)):
     for j in range(len(valores_objetos)):
         euclidiana(i,j)
 ############################# Necesario para correr las pruebas ########################
 #Ejecucion de funcion para el método vecino mas cercano e impresión de la solución inicial.
 vecino_cercano()
+arreglo = []
+for i in solucion_inicial:
+    arreglo.append(i)
 movement()
-#multiarranque()
 print("La distancia inicial con movimimiento es: " + str(suma_distancia_inicial))
-#if(solucion_multiarranque_menor < suma_distancia_inicial):
-#    print("Se encontró mejora con multiarranque con distancia: " + str(solucion_multiarranque_menor))
-#else:
-#    print("Nel")
+multiarranque()
+tiempo = time.clock() - start_time
+if(solucion_multiarranque_menor < suma_distancia_inicial):
+    print("Se encontró mejora con multiarranque con distancia: " + str(solucion_multiarranque_menor))
+else:
+    print("Multiarranque no encontró ninguna solucion mejor.")
+print("Tiempo total: " + str(tiempo))
