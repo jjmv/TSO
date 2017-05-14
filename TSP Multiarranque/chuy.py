@@ -11,6 +11,10 @@ contador = 0
 soluciones_sumas = [0 for i in range(200)]
 soluciones_multiarranque = [[] for i in range(200)]
 solucion_multiarranque_menor = 0
+<<<<<<< HEAD:TSP Multiarranque/chuy.py
+=======
+
+>>>>>>> 604a0fa99ca0c00cc6c4308e3e3a4aca243f15d0:TSP Multiarranque/tspm.py
 
 print("\nIngrese el nombre del archivo [Clase],[Caso1],[Caso2]....[Caso'n']")
 nombre = input() + ".txt"
@@ -48,7 +52,7 @@ def euclidiana(i,j):
         distancias[i][j] = suma
 
 def vecino_cercano():
-    global solucion_inicial, suma_distancia_inicial
+    global solucion_inicial, suma_distancia_inicial, movimiento
     solucion_inicial.append(0)
     taken = []
     taken.append(0)
@@ -70,6 +74,7 @@ def vecino_cercano():
     for j in range(len(solucion_inicial)-1):
         suma_distancia_inicial += distancias[solucion_inicial[j]][solucion_inicial[j+1]]
     print(suma_distancia_inicial)
+    movimiento = solucion_inicial
 
 
 def movement():
@@ -79,6 +84,7 @@ def movement():
     contador = 0
     movimiento = arreglo
     while(iterar == True):
+<<<<<<< HEAD:TSP Multiarranque/chuy.py
         for i in range(len(distancias)-3):
             for j in range(len(distancias)-3):
                 #movimiento = solucion_inicial
@@ -88,23 +94,50 @@ def movement():
                 movimiento.pop(j+1), movimiento.pop(j+1)
                 movimiento[j+2:j+2] = indicadores
                 suma_evaluadora = 0
+=======
+        for i in range(len(distancias)-2):
+            for j in range(len(distancias)-2):
+                indicador1 = movimiento[i+1]
+                indicador2 = movimiento[i+2]
+                movimiento.pop(j+1)
+                movimiento.pop(j+1)
+                suma_evaluadora = 0
+                movimiento.insert(j+1, indicador2)
+                movimiento.insert(j+1, indicador1)
+                print(movimiento)
+>>>>>>> 604a0fa99ca0c00cc6c4308e3e3a4aca243f15d0:TSP Multiarranque/tspm.py
                 for k in range(len(movimiento)-1):
                     suma_evaluadora += distancias[movimiento[k]][movimiento[k+1]]
                 if(suma_evaluadora < suma_distancia_inicial):
                     suma_distancia_inicial = suma_evaluadora
+<<<<<<< HEAD:TSP Multiarranque/chuy.py
                     for m in range(len(solucion_inicial)-2):
                         solucion_inicial[m] = movimiento[m]
+=======
+                    solucion_inicial = movimiento
+>>>>>>> 604a0fa99ca0c00cc6c4308e3e3a4aca243f15d0:TSP Multiarranque/tspm.py
                     contador = 0
                 else:
                     for k in range(len(solucion_inicial)):
                         movimiento[k] = solucion_inicial[k]
                     contador += 1
+<<<<<<< HEAD:TSP Multiarranque/chuy.py
                     if(contador == 100):
+=======
+                    movimiento = solucion_inicial
+                    if(contador == 10):
+>>>>>>> 604a0fa99ca0c00cc6c4308e3e3a4aca243f15d0:TSP Multiarranque/tspm.py
                         terminar = True
                         break
             if(terminar == True):
                 iterar = False
                 break
+<<<<<<< HEAD:TSP Multiarranque/chuy.py
+=======
+
+        iterar = False
+
+>>>>>>> 604a0fa99ca0c00cc6c4308e3e3a4aca243f15d0:TSP Multiarranque/tspm.py
 
 def multiarranque():
     global solucion_inicial, solucion_multiarranque_menor
